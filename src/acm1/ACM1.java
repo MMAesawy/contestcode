@@ -5,6 +5,10 @@
  */
 package acm1;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  *
  * @author MMAesawy
@@ -16,7 +20,14 @@ public class ACM1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println(helpfulMaths("11112223121321321321321321121213"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int i = 0;
+        try{
+            i = Integer.parseInt(reader.readLine());
+        }
+        catch(IOException d){}
+
+        System.out.println(waterMelon(i) ? "YES" : "NO");
     }
     
     /**
