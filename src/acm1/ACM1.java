@@ -20,9 +20,10 @@ public class ACM1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        String[] in = input();
-        output(in);
+        int numLines = Integer.parseInt(input(1)[0]);
+        String[] in = input(numLines);
+        
+        output(wayTooLongWords(numLines, in));
     }
     
     public static String[] input(int numLines){
