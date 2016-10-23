@@ -5,62 +5,47 @@
  */
 package acm1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Scanner;
 
-/**
- *
- * @author MMAesawy
- */
 public class wayTooLongWords {
-    
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        int numLines = Integer.parseInt(input(1)[0]);
-        String[] in = input(numLines);
-        
-        output(wayTooLongWords(numLines, in));
+        int n = inputInt();
+        output(luckyDivision(n) || containsLucky(n) ? "YES" : "NO");
     }
     
     public static String[] input(int numLines){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String[] input = new String[numLines];
-        try{
-            for (int i = 0; i < numLines; i++){
-                input[i] = reader.readLine();
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        finally{
-            return input;
-        }
-        
+        for (int i = 0; i < numLines; i++)
+            input[i] = scanner.nextLine();
+        return input;
     }
     
-    public static String[] input(){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<String> input = new ArrayList<>();
-        try{
-            while (true){
-                String i = reader.readLine();
-                if (i.isEmpty()) break;
-                else input.add(i);
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        finally{
-            return input.toArray(new String[0]);
-        }
-        
+    public static int inputInt(){
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        return n;
     }
     
     public static void output(String... out){
         for (String o : out) System.out.println(o);  
+    }
+    
+    public static boolean luckyDivision(int n){
+        return luckyDivision(n, 4) || luckyDivision(n, 7);
+    }
+    
+    public static boolean luckyDivision(int n, int d){
+        if (d>n) return false;
+        return n%d==0 || (luckyDivision(n,d*10+4) || luckyDivision(n,d*10+7));
+    }
+    
+    public static boolean containsLucky(int n){
+        String nString = n + "";
+        for (int i = 0; i < nString.length(); i++)
+            if (!(nString.charAt(i) == '4' || nString.charAt(i) == '7'))
+                return false;
+        return true;
     }
     
     public static String[] wayTooLongWords(int n, String... words){
